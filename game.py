@@ -28,9 +28,10 @@ def secret_number():
 
 def tip():
     '''
-    Inserts a player's tip
+    Inserts a player's tip and control them
     '''
     tip = input('Enter a number: ')
+    print(SEPARATOR)
     if len(tip) == 4 and tip.isnumeric():
         print(f">>> {tip}")
     else:
@@ -39,30 +40,56 @@ def tip():
     return(tip)
 
 def game():
+    '''
+
+    '''
     introduction()
     secret = secret_number()
     game = True
-    count_attemp = 0
+    attemp = 0
     while game:
-        attemp = tip()
-        if attemp == secret:
+        user_attemp = tip()
+        if user_attemp == secret:
             print('You got it')
-            count_attemp += 1
+            attemp += 1
             break
         else:
-            pass
+            bulls = 0
+            cows = 0
+            for x, number in enumerate(user_attemp):
+                if number == secret[x]:
+                    bulls += 1
+                elif number in secret[x]:
+                    cows += 1
 
-        count_attemp += 1
-    print(count_attemp)
+            print(f"{bulls} bulls, {cows} cows\n"
+                  f"{SEPARATOR}")
 
+            attemp += 1
+    count(attemp)
 
-    print('Super you find the secret number :)')
+def count(count_attemp: int):
+    '''
+    Print players score
+    '''
+    if count_attemp == 1:
+        return print(f"You are seer!!! You used just {count_attemp} tip")
+    elif count_attemp > 1 and count_attemp <= 4:
+        return print(f"You are amazing!!! You used {count_attemp} tip")
+    elif count_attemp > 4 and count_attemp <= 8:
+        return print(f"You are good!!! You used {count_attemp} tip")
+    elif count_attemp > 8 and count_attemp <= 12:
+        return print(f"Not good but not bad!!! You used {count_attemp} tip")
+    elif count_attemp > 12 and count_attemp <= 16:
+        return print(f"That is really bad!!! You used {count_attemp} tip")
+    else:
+        return print(f"Shame on you!!! You used {count_attemp} tip")
 
 def play():
     '''
     Play the game Bulls&Cows
     '''
     game()
-    #return result
+
 
 play()
