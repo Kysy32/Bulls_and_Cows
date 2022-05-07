@@ -18,16 +18,51 @@ def introduction():
             f"Let's play a bulls and cows game.\n"
             f"{SEPARATOR}")
 
-#introduction()
+def secret_number():
+    '''
+    Generate secret number for game
+    '''
+    secret = "".join((str(random.randint(0, 9)), str(random.randint(0, 9)), str(random.randint(0, 9)), str(random.randint(0, 9))))
+    print(secret)
+    return secret
+
+def tip():
+    '''
+    Inserts a player's tip
+    '''
+    tip = input('Enter a number: ')
+    if len(tip) == 4 and tip.isnumeric():
+        print(f">>> {tip}")
+    else:
+        print(f">>> {tip}")
+        print('Invalid input, try again!!!')
+    return(tip)
 
 def game():
+    introduction()
+    secret = secret_number()
     game = True
-    secret = [random.randint(0,9), random.randint(0,9), random.randint(0,9), random.randint(0,9)]
+    count_attemp = 0
+    while game:
+        attemp = tip()
+        if attemp == secret:
+            print('You got it')
+            count_attemp += 1
+            break
+        else:
+            pass
+
+        count_attemp += 1
+    print(count_attemp)
 
 
+    print('Super you find the secret number :)')
 
 def play():
-    introduction()
-    return result
+    '''
+    Play the game Bulls&Cows
+    '''
+    game()
+    #return result
 
-game()
+play()
