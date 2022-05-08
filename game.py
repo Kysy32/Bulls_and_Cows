@@ -22,9 +22,17 @@ def secret_number():
     '''
     Generate secret number for game
     '''
-    secret = "".join((str(random.randint(0, 9)), str(random.randint(0, 9)), str(random.randint(0, 9)), str(random.randint(0, 9))))
-    print(secret)
-    return secret
+    secret = [str(random.randint(1,9))]
+
+    while len(secret) < 4:
+        number = str(random.randint(0, 9))
+        if number in secret:
+            pass
+        else:
+            secret.append(number)
+    secret_num = "".join(secret)
+    print(secret_num)
+    return secret_num
 
 def tip():
     '''
@@ -57,10 +65,11 @@ def game():
             bulls = 0
             cows = 0
             for x, number in enumerate(user_attemp):
-                if number == secret[x]:
-                    bulls += 1
-                elif number in secret[x]:
-                    cows += 1
+                if number in secret:
+                    if number == secret[x]:
+                        bulls += 1
+                    else:
+                        cows += 1
 
             print(f"{bulls} bulls, {cows} cows\n"
                   f"{SEPARATOR}")
