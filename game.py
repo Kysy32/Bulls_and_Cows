@@ -38,10 +38,12 @@ def tip():
     '''
     Inserts a player's tip and control them
     '''
+
     tip = input('Enter a number: ')
     print(SEPARATOR)
     if len(tip) == 4 and tip.isnumeric():
         print(f">>> {tip}")
+
     else:
         print(f">>> {tip}")
         print('Invalid input, try again!!!')
@@ -71,11 +73,35 @@ def game():
                     else:
                         cows += 1
 
-            print(f"{bulls} bulls, {cows} cows\n"
-                  f"{SEPARATOR}")
+            bulls_result = bull_count(bulls)
+            cows_result = cow_count(cows)
+
+            print(f"{bulls_result}, {cows_result}")
 
             attemp += 1
     count(attemp)
+
+def bull_count (bulls):
+    '''
+    Decide if use bull or bulls
+    '''
+    if bulls == 0:
+        return f"{bulls} bulls"
+    elif bulls == 1:
+        return f"{bulls} bull"
+    else:
+        return f"{bulls} bulls"
+
+def cow_count (cows):
+    '''
+    Decide if use cow or cows
+    '''
+    if cows == 0:
+        return f"{cows} cows"
+    elif cows == 1:
+        return f"{cows} cow"
+    else:
+        return f"{cows} cows"
 
 def count(count_attemp: int):
     '''
