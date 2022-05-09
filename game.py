@@ -5,12 +5,13 @@ email: jkysely@centrum.cz
 discord: Kysy#6104
 """
 import random
+import time
 
 SEPARATOR = '-' * 47
 
 def introduction():
     '''
-    Print greeting and game rules
+    Print greeting and introduction
     '''
     return print(f"Hi there\n"
             f"{SEPARATOR}\n"
@@ -31,27 +32,41 @@ def secret_number():
         else:
             secret.append(number)
     secret_num = "".join(secret)
-    print(secret_num)
+    #print(secret_num)
     return secret_num
 
 def tip():
     '''
     Inserts a player's tip and control them
     '''
+    control = True
+    while control:
+        tip = input('Enter a number: ')
+        print(SEPARATOR)
+        if tip.startswith('0'):
+            print(f">>> {tip}")
+            print('Invalid input, try again!!! \n'
+                  'Please insert 4 unique numbers')
+            print(SEPARATOR)
 
-    tip = input('Enter a number: ')
-    print(SEPARATOR)
-    if len(tip) == 4 and tip.isnumeric():
-        print(f">>> {tip}")
-
-    else:
-        print(f">>> {tip}")
-        print('Invalid input, try again!!!')
-    return(tip)
+        elif len(tip) == 4 and tip.isnumeric():
+            if len(set(tip)) == 4:
+                print(f">>> {tip}")
+                return tip
+            else:
+                print(f">>> {tip}")
+                print('Invalid input, try again!!! \n'
+                      'Please insert 4 unique numbers')
+                print(SEPARATOR)
+        else:
+            print(f">>> {tip}")
+            print('Invalid input, try again!!! \n'
+                  'Please insert 4 unique numbers')
+            print(SEPARATOR)
 
 def game():
     '''
-
+    Start game, control player turns and print the final score.
     '''
     introduction()
     secret = secret_number()
@@ -77,6 +92,7 @@ def game():
             cows_result = cow_count(cows)
 
             print(f"{bulls_result}, {cows_result}")
+            print(SEPARATOR)
 
             attemp += 1
     count(attemp)
@@ -109,13 +125,13 @@ def count(count_attemp: int):
     '''
     if count_attemp == 1:
         return print(f"You are seer!!! You used just {count_attemp} tip")
-    elif count_attemp > 1 and count_attemp <= 4:
+    elif count_attemp > 1 and count_attemp <= 5:
         return print(f"You are amazing!!! You used {count_attemp} tip")
-    elif count_attemp > 4 and count_attemp <= 8:
+    elif count_attemp > 5 and count_attemp <= 10:
         return print(f"You are good!!! You used {count_attemp} tip")
-    elif count_attemp > 8 and count_attemp <= 12:
+    elif count_attemp > 10 and count_attemp <= 15:
         return print(f"Not good but not bad!!! You used {count_attemp} tip")
-    elif count_attemp > 12 and count_attemp <= 16:
+    elif count_attemp > 15 and count_attemp <= 20:
         return print(f"That is really bad!!! You used {count_attemp} tip")
     else:
         return print(f"Shame on you!!! You used {count_attemp} tip")
@@ -124,7 +140,9 @@ def play():
     '''
     Play the game Bulls&Cows
     '''
+    start_time = time.time()
     game()
-
+    execution_time = (time.time() - start_time)
+    print(F'Your game time is {round(execution_time)} sec.')
 
 play()
