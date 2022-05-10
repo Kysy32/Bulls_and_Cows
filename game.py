@@ -23,8 +23,9 @@ def secret_number():
     '''
     Generate secret number for game
     '''
-    secret = [str(random.randint(1,9))]
+    secret = [str(random.randint(1,9))] #generates first random number in interval 1-9
 
+    #generates the rest of numbers
     while len(secret) < 4:
         number = str(random.randint(0, 9))
         if number in secret:
@@ -37,8 +38,10 @@ def secret_number():
 
 def tip():
     '''
-    Inserts a player's tip and control them
+    Inserts a player tip and control them
     '''
+
+    #loop for control player tip
     control = True
     while control:
         tip = input('Enter a number: ')
@@ -68,10 +71,13 @@ def game():
     '''
     Start game, control player turns and print the final score.
     '''
-    introduction()
-    secret = secret_number()
+    introduction() #print introduction
+    secret = secret_number() #generate secret number
+
     game = True
-    attemp = 0
+    attemp = 0 #auxiliary variable for count attemps
+
+    #loop which search number in string of numbers
     while game:
         user_attemp = tip()
         if user_attemp == secret:
@@ -88,8 +94,8 @@ def game():
                     else:
                         cows += 1
 
-            bulls_result = bull_count(bulls)
-            cows_result = cow_count(cows)
+            bulls_result = bull_count(bulls) #decision if use bull or bulls
+            cows_result = cow_count(cows) #decision if use cow or cows
 
             print(f"{bulls_result}, {cows_result}")
             print(SEPARATOR)
@@ -127,11 +133,11 @@ def count(count_attemp: int):
         return print(f"You are seer!!! You used just {count_attemp} tip")
     elif count_attemp > 1 and count_attemp <= 5:
         return print(f"You are amazing!!! You used {count_attemp} tip")
-    elif count_attemp > 5 and count_attemp <= 10:
+    elif count_attemp > 5 and count_attemp <= 12:
         return print(f"You are good!!! You used {count_attemp} tip")
-    elif count_attemp > 10 and count_attemp <= 15:
+    elif count_attemp > 12 and count_attemp <= 18:
         return print(f"Not good but not bad!!! You used {count_attemp} tip")
-    elif count_attemp > 15 and count_attemp <= 20:
+    elif count_attemp > 18 and count_attemp <= 25:
         return print(f"That is really bad!!! You used {count_attemp} tip")
     else:
         return print(f"Shame on you!!! You used {count_attemp} tip")
@@ -143,6 +149,9 @@ def play():
     start_time = time.time()
     game()
     execution_time = (time.time() - start_time)
-    print(F'Your game time is {round(execution_time)} sec.')
+    seconds = execution_time % 60
+    minutes = execution_time // 60
+
+    print(F'Your game time is {round(minutes)} min and {round(seconds)} sec.')
 
 play()
